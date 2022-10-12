@@ -4,6 +4,7 @@ using UnityEngine;
 public class Crate : MonoBehaviour
 {
     public SpawnController controller;
+    public Rigidbody2D rb;
     void Start()
     {
         

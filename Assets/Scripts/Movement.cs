@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
@@ -14,12 +16,17 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform Groud_Check;
     [SerializeField] private LayerMask groundlayer;
 
+    private void Start()
+    {
+        animation = GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
+        animation.SetFloat("Horizontal",MathF.Abs(horizontal));
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jump);
@@ -52,5 +59,8 @@ public class Movement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+       
     }
+
+    private Animator animation;
 }
